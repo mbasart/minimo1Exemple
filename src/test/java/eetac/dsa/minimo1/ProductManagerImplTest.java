@@ -44,6 +44,43 @@ public class ProductManagerImplTest {
         assertEquals(productList2.get(2).ventas,1);
     }
 
+    @Test
+    public void comanda(){
+        Comandes[] comandes = new Comandes[3];
+        comandes[0] = new Comandes("galetes", 2);
+        comandes[1] = new Comandes("madalena", 1);
+        comandes[2] = new Comandes("xuxos",3);
+        int realitza = productManager.realizarPedido("Victor",comandes);
+        assertEquals(realitza,0);
+    }
+
+    @Test
+    public void servir(){
+        Comandes[] comandes = new Comandes[2];
+        comandes[0] = new Comandes("galetes", 2);
+        comandes[1] = new Comandes("madalena", 1);
+        int realitza = productManager.realizarPedido("Josep",comandes);
+        assertEquals(realitza,0);
+        int servirPedi = productManager.servirPedido();
+        assertEquals(servirPedi,1);
+    }
+
+    @Test
+    public void pedidosRea(){
+        Comandes[] comandes = new Comandes[2];
+        comandes[0] = new Comandes("galetes", 2);
+        comandes[1] = new Comandes("xuxos", 1);
+        int realitza = productManager.realizarPedido("Victor",comandes);
+        assertEquals(realitza,0);
+        int servirPedi = productManager.servirPedido();
+        assertEquals(servirPedi,1);
+        List<Comandes> comandesRealitzades = this.productManager.pedidosYaRealizados("Victor"); //dona error
+        assertEquals(comandesRealitzades.get(0).nameProduct,"galetes");
+        assertEquals(comandesRealitzades.get(0).quantitat,2);
+        assertEquals(comandesRealitzades.get(1).nameProduct,"xuxos");
+        assertEquals(comandesRealitzades.get(1).quantitat,1);
+    }
+
     @org.junit.After
     public void tearDown(){
         productManager.clear();

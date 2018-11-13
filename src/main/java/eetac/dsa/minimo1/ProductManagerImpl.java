@@ -105,15 +105,15 @@ public class ProductManagerImpl implements ProductManager{
             log.warn("Error! Aquest usuari no existeix a la llista");
             return null;
         } else {
-            List<Comandes> pedidosRealizados = userMap.get(user).getLlistaComandes();
-            log.info("Llista comanda:" + pedidosRealizados.toString());
+            List<Comandes> pedidosRealizados = userMap.get(user).getLlistaComandes(); //dona error
+            //log.info("Llista comanda:" + pedidosRealizados.toString());
             return pedidosRealizados;
         }
     }
 
     public int servirPedido(){
         log.info("Servim les comandes");
-        int pedi = 1;
+        int pedi = 0;
         Comandes[] comandes = cuaComandes.remove();
         if(comandes != null){
             for (Comandes c: comandes) {
@@ -121,15 +121,17 @@ public class ProductManagerImpl implements ProductManager{
                 Product p =this.getProducte(nameProducte);
                 if(p == null){
                     log.warn("Error! Aquest producte no existeix");
-                    return -1;
+                    pedi = -1; //producte no existeix
                 } else{
                     p.updateVentas(c.getQuantitat());
-                    return pedi; //si les vendes s'han actualitzat correctament torna un 1
+                    pedi = 1; //si les vendes s'han actualitzat correctament torna un 1
                 }
             }
             //user.addComanda()
+        } else {
+            log.warn("Error! No queden comandes a la llista");
         }
-        return 2; //si tot finalitza correctament torna un 2
+        return pedi;
     }
 
 

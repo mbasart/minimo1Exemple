@@ -25,7 +25,7 @@ public class Usuari {
     }
 
     public void addComanda(Comandes[] comandes){
-        for(int i =0; i<= comandes.length; i++)
+        for(int i =0; i< comandes.length; i++)
             this.llistaComandes.add(comandes[i]);
     }
 
