@@ -9,7 +9,6 @@ import java.util.List;
 
 @Path("service")
 public class RESTservice {
-    //com posar swagger?? "https://147.83.7.155:8080/swagger/"
 
     private ProductManager productManager;
 
