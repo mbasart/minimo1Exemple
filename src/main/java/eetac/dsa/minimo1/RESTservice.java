@@ -22,6 +22,12 @@ public class RESTservice {
     }
 
 
+    @Path("basic")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getIt() {
+        return "Got it!";
+    }
 
     @GET
     @Path("/orderPrice")
